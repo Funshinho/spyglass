@@ -46,7 +46,7 @@ func (c Client) GetTeams() ([]Team, error) {
 	collector.OnXML("//div[@id=\"all_teams_active\"]//th[@data-stat=\"franch_name\"]/a", func(e *colly.XMLElement) {
 		regex := regexp.MustCompile(`\/teams\/([^}]*)\/`)
 		match := regex.FindStringSubmatch(e.Attr("href"))
-		tricode := match[1]
+		tricode := getModifiedTricode(match[1])
 		team := Team{
 			ID:      tricode,
 			Name:    e.Text,
@@ -63,7 +63,19 @@ func (c Client) GetTeams() ([]Team, error) {
 	return teams, nil
 }
 
-// GetPlayers returns the list of teams for the given season by list of teams
+func getModifiedTricode(tricode string) string {
+	switch tricode {
+	case "NJN":
+		return "BRK"
+	case "NOH":
+		return "NOP"
+	case "CHA":
+		return "CHO"
+	}
+	return tricode
+}
+
+// GetPlayers returns the list of teams for the given season by list of teams, or all teams if no teams specified
 func (c Client) GetPlayers(year int, teams ...string) ([]Player, error) {
 	collector := colly.NewCollector()
 	extensions.RandomUserAgent(collector)
@@ -98,7 +110,17 @@ func (c Client) GetPlayers(year int, teams ...string) ([]Player, error) {
 			players = append(players, player)
 		})
 	})
-
+	if teams == nil {
+		refTeams, err := c.GetTeams()
+		if err != nil {
+			fmt.Println(err)
+			return []Player{}, err
+		}
+		teams = make([]string, 0)
+		for _, refTeam := range refTeams {
+			teams = append(teams, refTeam.ID)
+		}
+	}
 	for _, team := range teams {
 		err := collector.Visit(c.Url + "/teams/" + team + "/" + strconv.Itoa(year) + ".html")
 		if err != nil {

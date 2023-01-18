@@ -19,7 +19,7 @@ go get github.com/Funshinho/gobert
 ### Usage
 
 ```go
-boxscores := gobert.GetBoxscores("20220101")
-players := gobert.GetPlayers(2023, "MIA")
-teams := gobert.GetTeams()
+players := gobert.GetPlayers(2023)               // Returns the roster for all teams
+players := gobert.GetPlayers(2023, "MIA", "LAL") // Returns the roster for the given teams
+teams := gobert.GetTeams()                       // Returns the list of teams
 ```
