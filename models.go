@@ -25,6 +25,7 @@ type Player struct {
 	TeamID    string
 	FirstName string
 	LastName  string
+	Number    string
 	Position  Position
 }
 

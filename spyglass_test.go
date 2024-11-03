@@ -37,6 +37,7 @@ func TestGetPlayers(t *testing.T) {
 	assert.Equal("barnesc01", player1.ID)
 	assert.Equal("Scottie", player1.FirstName)
 	assert.Equal("Barnes", player1.LastName)
+	assert.Equal("4", player1.Number)
 	assert.Equal(PowerForward, player1.Position)
 	assert.Equal("TOR", player1.TeamID)
 }

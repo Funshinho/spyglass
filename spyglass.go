@@ -94,6 +94,7 @@ func (c Client) GetPlayers(year int, teams ...string) ([]Player, error) {
 			match = regex.FindStringSubmatch(h.ChildAttr("td[data-stat=\"player\"] > a", "href"))
 			playerID := match[1]
 
+			number := h.ChildText("th[data-stat=\"number\"]")
 			fullName := h.ChildText("td[data-stat=\"player\"] > a")
 			position := h.ChildText("td[data-stat=\"pos\"]")
 			name := strings.Split(fullName, " ")
@@ -104,6 +105,7 @@ func (c Client) GetPlayers(year int, teams ...string) ([]Player, error) {
 				ID:        playerID,
 				FirstName: firstName,
 				LastName:  lastName,
+				Number:    number,
 				Position:  Position(position),
 				TeamID:    teamID,
 			}
