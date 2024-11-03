@@ -1,4 +1,4 @@
-package gobert
+package spyglass
 
 import (
 	"testing"

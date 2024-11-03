@@ -1,4 +1,4 @@
-# BoxscGobertore
+# Spyglass
 
 Go client to fetch NBA players and teams info, as well as game statistics from basketball reference
 
@@ -7,19 +7,19 @@ Go client to fetch NBA players and teams info, as well as game statistics from b
 ### Installation
 
 ```shell
-go get github.com/Funshinho/gobert
+go get github.com/Funshinho/spyglass
 ```
 
 ### Importing
 
 ```go
- import "github.com/Funshinho/gobert
+ import "github.com/Funshinho/spyglass
 ```
 
 ### Usage
 
 ```go
-players := gobert.GetPlayers(2023)               // Returns the roster for all teams
-players := gobert.GetPlayers(2023, "MIA", "LAL") // Returns the roster for the given teams
-teams := gobert.GetTeams()                       // Returns the list of teams
+players := spyglass.GetPlayers(2024)               // Returns the roster for all teams
+players := spyglass.GetPlayers(2024, "MIA", "LAL") // Returns the roster for the given teams
+teams := spyglass.GetTeams()                       // Returns the list of teams
 ```

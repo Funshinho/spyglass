@@ -1,4 +1,4 @@
-package gobert
+package spyglass
 
 type Position string
 
